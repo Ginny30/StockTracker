@@ -1,0 +1,34 @@
+<div class="boxStyle" >
+    <h1 style="text-align: center;">STOCK TRACKER</h1>    
+    <label for="symbol">Enter the symbol of a stock to track</label>
+    <div style="margin: 20px;">
+        <div [formGroup] = "symbolForm">
+            <input type = "text" formControlName = "symbol">
+        </div>
+        <button type = "button" class="button" (click) = "onSymbolClicked()" [disabled] = "selectedSymbol == ''">Track Stock</button>
+        <div style="border: 1px solid; width: 200px">
+        <ng-select [(ngModel)] = "selectedSymbol" class="custom">
+            <ng-option *ngFor="let symbol of symbolArray" [value]="symbol" style="border: 1px;">{{symbol}}</ng-option>
+          </ng-select>
+          
+          <!--Using items input-->
+          <ng-select [items]="symbolArray" 
+                    bindLabel="name" 
+                    bindValue="id" 
+                    [(ngModel)]="selectedSymbol"          
+                    >
+          </ng-select>
+          </div>
+    </div>
+
+    <div *ngIf = "appService.stockDataList.length > 0">
+        <ng-container *ngFor = "let data of appService.stockDataList">
+            <app-symbol-info [symbolObj] = "data" (OnRemoveStockEvent) = "removeStockFromList($event)" ></app-symbol-info>
+        </ng-container>
+    </div>
+</div>
+
+<div *ngIf = "appService.loading">
+    <span style="margin: 300px; background-color: cadetblue;">Updating data. Please wait...</span>
+
+</div>

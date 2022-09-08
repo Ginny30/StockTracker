@@ -1,0 +1,31 @@
+<div style="border: 1px solid; margin-left: 220px; margin-bottom: 20px; width: 700px">
+    <h1 style="text-align: center;">{{symbolObj.name}}</h1>
+    <button type="button" (click)="onRemoveStockClick(symbolObj.name)" style="margin-left: 650px;"><i
+            class="fa fa-times" aria-hidden="true"></i></button>
+    <br>
+    <label for="change">Change today: </label>
+    <label for="changeValue">{{ symbolObj.changePercentage | number}} %</label>
+
+        <label for="openingPrice" class="labelRight">Opening Price:</label>
+        <label for="openingValue">{{symbolObj.openingPrice | currency}}</label>
+    <br>
+
+    <label for="currentPrice">Current Price: </label>
+    <label for="currentValue">{{symbolObj.currentPrice | currency}}</label>
+
+    <label for="highPrice " class="labelRight">High Price: </label>
+    <label for="highPriceValue">{{symbolObj.highPrice | currency}}</label>
+    <br>
+
+    <ng-container *ngIf = "symbolObj.changePercentage > 0; else DownArrow">
+        <i class="fa fa-long-arrow-up fa-3x" style="color: green; margin-left: 500px;"></i>
+    </ng-container>
+
+    <ng-template #DownArrow>
+        <i class="fa fa-long-arrow-down fa-3x" style="color: red; margin-left: 500px;"></i>
+    </ng-template>
+
+    <br>
+    <a [routerLink]="['/sentiment', symbolObj.name]">Sentiments details</a>
+
+</div>

@@ -1,0 +1,36 @@
+<div *ngIf = "sentimentsDetails" class="boxStyle">
+    <h1 style="text-align: center;">{{sentimentsDetails.symbol}}</h1>
+    <div style="border: 1px;">
+        <div *ngFor = "let obj of sentimentsDetailsArray; let i = index">
+            <ng-container *ngIf = "i < sentimentsDetails.data.length; else NoData">
+                <label class="label"> <u> <b> {{getMonthName(sentimentsDetails.data[i].month)}} {{sentimentsDetails.data[i].year}} </b> </u> </label>
+                <br>
+
+                <label class="label">Change: {{sentimentsDetails.data[i].change}}</label>
+                <br>
+                
+                <label class="label">MSPR: {{sentimentsDetails.data[i].mspr}}</label>
+
+                <ng-container *ngIf = "sentimentsDetails.data[i].change > 0; else DownArrow">
+                    <i class="fa fa-long-arrow-up fa-3x" style="color: green; margin-left: 100px;"></i>
+                </ng-container>
+            
+                <ng-template #DownArrow>
+                    <i class="fa fa-long-arrow-down fa-3x" style="color: red; margin-left: 130px;"></i>
+                </ng-template>
+                <hr>
+
+            </ng-container>
+            <ng-template #NoData>
+                <label> <u> <b>{{setNoMonthData(i)}} </b> </u></label>
+                <br>
+                <label>No data</label>
+
+            </ng-template>
+        </div>
+
+        <a routerLink = '/stock-tracker'>Back to list of stocks</a>
+
+    </div>
+
+</div>
