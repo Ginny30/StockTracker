@@ -3,7 +3,8 @@
     <label for="symbol">Enter the symbol of a stock to track</label>
     <div style="margin: 20px;">
         <div [formGroup] = "symbolForm">
-            <input type = "text" formControlName = "symbol">
+            <input type = "text" formControlName = "symbol" placeholder="Please enter symbol" #symbol>
+            <p *ngIf = "symbol.value">Click down in the below text box... for look up </p>
         </div>
         <button type = "button" class="button" (click) = "onSymbolClicked()" [disabled] = "selectedSymbol == ''">Track Stock</button>
         <div style="border: 1px solid; width: 200px">
